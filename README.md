@@ -24,10 +24,10 @@ Static site (plain HTML, CSS, and vanilla JS), no build step, no dependencies to
 
 ## Photos / placeholders to replace
 
-- **Hero portrait** — `images/portrait.svg`. Drop in a real headshot and update the `.hero-img` `src`.
-- **Industry and case-study images** — currently seeded `picsum.photos` placeholders. Replace the `src` URLs with real visuals.
+- **Hero portrait**: `images/portrait.svg`. Drop in a real headshot and update the `.hero-img` `src`.
+- **Industry and case-study images**: currently seeded `picsum.photos` placeholders. Replace the `src` URLs with real visuals.
 - **Viral-post metrics** and the **B2B SaaS testimonial** (Daniel Mercer) are illustrative; swap in real ones.
-- **Consultation link** — update `https://calendly.com/your-link` in `index.html`.
+- **Consultation link**: update `https://calendly.com/your-link` in `index.html`.
 
 ## Run locally
 
