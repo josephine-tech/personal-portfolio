@@ -59,12 +59,11 @@ h1,h2,h3,h4,.hero-h1,.h2 { font-family:'Space Grotesk',sans-serif; color:var(--i
 
 /* ---------- ambient background ---------- */
 .ambient { position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
-.orb { position:absolute; border-radius:50%; filter:blur(70px); opacity:0.5; }
-.orb-1 { width:46vw; height:46vw; left:-12vw; top:-10vw; background:radial-gradient(circle, rgba(138,51,70,0.30), transparent 70%); animation:float1 22s ease-in-out infinite; }
-.orb-2 { width:40vw; height:40vw; right:-10vw; top:18vh; background:radial-gradient(circle, rgba(191,166,160,0.45), transparent 70%); animation:float2 26s ease-in-out infinite; }
-.orb-3 { width:38vw; height:38vw; left:20vw; bottom:-16vw; background:radial-gradient(circle, rgba(107,39,55,0.20), transparent 70%); animation:float1 30s ease-in-out infinite reverse; }
-@keyframes float1 { 0%,100%{ transform:translate(0,0) scale(1);} 50%{ transform:translate(4vw,3vw) scale(1.08);} }
-@keyframes float2 { 0%,100%{ transform:translate(0,0) scale(1);} 50%{ transform:translate(-3vw,4vw) scale(1.1);} }
+/* static, GPU-cheap ambient wash (no per-frame compositing) */
+.orb { position:absolute; border-radius:50%; filter:blur(52px); opacity:0.45; }
+.orb-1 { width:42vw; height:42vw; left:-12vw; top:-10vw; background:radial-gradient(circle, rgba(138,51,70,0.28), transparent 70%); }
+.orb-2 { width:36vw; height:36vw; right:-10vw; top:18vh; background:radial-gradient(circle, rgba(191,166,160,0.42), transparent 70%); }
+.orb-3 { display:none; }
 
 /* ---------- scroll progress ---------- */
 .progress { position:fixed; top:0; left:0; right:0; height:3px; z-index:200; background:transparent; }
@@ -151,8 +150,12 @@ body.cursor-on a, body.cursor-on button { cursor:none; }
 .hero-scroll span { width:4px; height:8px; border-radius:2px; background:var(--burgundy); margin-top:7px; animation:scrolldot 1.8s var(--ease) infinite; }
 @keyframes scrolldot { 0%{ opacity:0; transform:translateY(-4px);} 40%{ opacity:1;} 80%{ opacity:0; transform:translateY(10px);} 100%{ opacity:0;} }
 
-/* glassmorphism */
-.glass { background:var(--glass-bg); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); border:1px solid var(--glass-brd); box-shadow:var(--sh-glass); }
+/* Frosted panels. backdrop-filter (the expensive part) is reserved for the
+   few elements that actually overlap imagery: the hero KPI cards and the nav.
+   Everywhere else uses an opaque-enough translucent panel that looks identical
+   without the per-frame GPU compositing cost. */
+.glass { background:rgba(253,251,248,0.88); border:1px solid var(--glass-brd); box-shadow:var(--sh-glass); }
+.kpi.glass { background:var(--glass-bg); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); }
 
 /* ---------- trust marquee ---------- */
 .trust { padding:26px 0; border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft); background:rgba(253,251,248,0.4); overflow:hidden; }
@@ -182,6 +185,10 @@ body.cursor-on a, body.cursor-on button { cursor:none; }
 .industry-desc { font-size:14px; color:var(--text); line-height:1.65; }
 .industry-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
 .industry-tags span { font-family:'Space Grotesk',sans-serif; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--burgundy); background:rgba(107,39,55,0.07); border:1px solid var(--line); padding:5px 10px; border-radius:100px; }
+
+/* on-brand image placeholders (swap for real photos) */
+.media-ph { position:relative; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, var(--taupe) 0%, var(--burgundy-2) 58%, var(--burgundy) 100%); }
+.media-ph::before { content:attr(data-ph); position:relative; z-index:3; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(253,251,248,0.9); padding:8px 16px; border:1px solid rgba(253,251,248,0.45); border-radius:100px; }
 
 /* ---------- case studies ---------- */
 .cases { display:flex; flex-direction:column; gap:28px; }

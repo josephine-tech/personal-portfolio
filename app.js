@@ -78,7 +78,7 @@
     /* ---- Lenis smooth scrolling ---- */
     var lenis = null;
     if (window.Lenis && !reduce) {
-      lenis = new window.Lenis({ duration: 1.1, smoothWheel: true });
+      lenis = new window.Lenis({ duration: 0.8, smoothWheel: true });
       var raf = function (t) { lenis.raf(t); requestAnimationFrame(raf); };
       requestAnimationFrame(raf);
     }
@@ -129,19 +129,26 @@
       var stage = document.querySelector('.hero-stage');
       if (stage) {
         var layers = stage.querySelectorAll('[data-depth]');
+        var srect = null, sx = 0, sy = 0, sTick = false;
+        stage.addEventListener('mouseenter', function () { srect = stage.getBoundingClientRect(); });
         stage.addEventListener('mousemove', function (e) {
-          var r = stage.getBoundingClientRect();
-          var cx = (e.clientX - r.left) / r.width - 0.5;
-          var cy = (e.clientY - r.top) / r.height - 0.5;
-          layers.forEach(function (l) {
-            var d = parseFloat(l.dataset.depth) * 100;
-            l.style.transform = 'translate3d(' + (-cx * d) + 'px,' + (-cy * d) + 'px,0)';
+          if (!srect) srect = stage.getBoundingClientRect();
+          sx = e.clientX; sy = e.clientY;
+          if (sTick) return; sTick = true;
+          requestAnimationFrame(function () {
+            var cx = (sx - srect.left) / srect.width - 0.5;
+            var cy = (sy - srect.top) / srect.height - 0.5;
+            layers.forEach(function (l) {
+              var d = parseFloat(l.dataset.depth) * 100;
+              l.style.transform = 'translate3d(' + (-cx * d) + 'px,' + (-cy * d) + 'px,0)';
+            });
+            stage.style.transform = 'rotateY(' + (cx * 6) + 'deg) rotateX(' + (-cy * 6) + 'deg)';
+            sTick = false;
           });
-          stage.style.transform = 'rotateY(' + (cx * 6) + 'deg) rotateX(' + (-cy * 6) + 'deg)';
         });
         stage.addEventListener('mouseleave', function () {
           layers.forEach(function (l) { l.style.transform = ''; });
-          stage.style.transform = '';
+          stage.style.transform = ''; srect = null;
         });
       }
     }
@@ -150,26 +157,40 @@
     if (fine && !reduce) {
       document.querySelectorAll('.tilt, .tilt-soft').forEach(function (el) {
         var max = el.classList.contains('tilt-soft') ? 4 : 8;
+        var r = null, mx = 0, my = 0, tick = false;
+        el.addEventListener('mouseenter', function () { r = el.getBoundingClientRect(); });
         el.addEventListener('mousemove', function (e) {
-          var r = el.getBoundingClientRect();
-          var cx = (e.clientX - r.left) / r.width - 0.5;
-          var cy = (e.clientY - r.top) / r.height - 0.5;
-          el.style.transform = 'perspective(900px) rotateY(' + (cx * max) + 'deg) rotateX(' + (-cy * max) + 'deg) translateY(-4px)';
+          if (!r) r = el.getBoundingClientRect();
+          mx = e.clientX; my = e.clientY;
+          if (tick) return; tick = true;
+          requestAnimationFrame(function () {
+            var cx = (mx - r.left) / r.width - 0.5;
+            var cy = (my - r.top) / r.height - 0.5;
+            el.style.transform = 'perspective(900px) rotateY(' + (cx * max) + 'deg) rotateX(' + (-cy * max) + 'deg) translateY(-4px)';
+            tick = false;
+          });
         });
-        el.addEventListener('mouseleave', function () { el.style.transform = ''; });
+        el.addEventListener('mouseleave', function () { el.style.transform = ''; r = null; });
       });
     }
 
     /* ---- magnetic buttons ---- */
     if (fine && !reduce) {
       document.querySelectorAll('.magnetic').forEach(function (el) {
+        var r = null, mx = 0, my = 0, tick = false;
+        el.addEventListener('mouseenter', function () { r = el.getBoundingClientRect(); });
         el.addEventListener('mousemove', function (e) {
-          var r = el.getBoundingClientRect();
-          var x = e.clientX - r.left - r.width / 2;
-          var y = e.clientY - r.top - r.height / 2;
-          el.style.transform = 'translate(' + (x * 0.25) + 'px,' + (y * 0.35) + 'px)';
+          if (!r) r = el.getBoundingClientRect();
+          mx = e.clientX; my = e.clientY;
+          if (tick) return; tick = true;
+          requestAnimationFrame(function () {
+            var x = mx - r.left - r.width / 2;
+            var y = my - r.top - r.height / 2;
+            el.style.transform = 'translate(' + (x * 0.25) + 'px,' + (y * 0.35) + 'px)';
+            tick = false;
+          });
         });
-        el.addEventListener('mouseleave', function () { el.style.transform = ''; });
+        el.addEventListener('mouseleave', function () { el.style.transform = ''; r = null; });
       });
     }
 
