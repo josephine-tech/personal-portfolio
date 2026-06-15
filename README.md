@@ -1,6 +1,6 @@
-# Josephine, Portfolio Site
+# Josephine U., Portfolio Site
 
-A premium single-page portfolio for Josephine, Full-Stack Marketing Strategist.
+A premium single-page portfolio for Josephine U., Full-Stack Marketing Strategist.
 
 Static site (plain HTML, CSS, and vanilla JS), no build step, no dependencies to install. Motion is powered by GSAP, ScrollTrigger, and Lenis loaded from a CDN at runtime.
 
