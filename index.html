@@ -72,7 +72,10 @@
     <div class="hero-visual">
       <div class="hero-stage" data-tilt-stage>
         <div class="hero-portrait" data-depth="0.06">
-          <img src="images/portrait.svg" alt="Portrait of Josephine, Full-Stack Marketing Strategist" loading="eager">
+          <picture>
+            <source srcset="images/portrait.webp" type="image/webp">
+            <img class="hero-img" src="images/portrait.jpg" alt="Portrait of Josephine, Full-Stack Marketing Strategist" width="880" height="1100" loading="eager" fetchpriority="high">
+          </picture>
           <div class="hero-portrait-glow" aria-hidden="true"></div>
         </div>
         <div class="kpi kpi-1 glass" data-depth="0.16">
