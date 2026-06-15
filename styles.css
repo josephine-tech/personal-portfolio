@@ -59,12 +59,11 @@ h1,h2,h3,h4,.hero-h1,.h2 { font-family:'Space Grotesk',sans-serif; color:var(--i
 
 /* ---------- ambient background ---------- */
 .ambient { position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
-.orb { position:absolute; border-radius:50%; filter:blur(70px); opacity:0.5; }
-.orb-1 { width:46vw; height:46vw; left:-12vw; top:-10vw; background:radial-gradient(circle, rgba(138,51,70,0.30), transparent 70%); animation:float1 22s ease-in-out infinite; }
-.orb-2 { width:40vw; height:40vw; right:-10vw; top:18vh; background:radial-gradient(circle, rgba(191,166,160,0.45), transparent 70%); animation:float2 26s ease-in-out infinite; }
-.orb-3 { width:38vw; height:38vw; left:20vw; bottom:-16vw; background:radial-gradient(circle, rgba(107,39,55,0.20), transparent 70%); animation:float1 30s ease-in-out infinite reverse; }
-@keyframes float1 { 0%,100%{ transform:translate(0,0) scale(1);} 50%{ transform:translate(4vw,3vw) scale(1.08);} }
-@keyframes float2 { 0%,100%{ transform:translate(0,0) scale(1);} 50%{ transform:translate(-3vw,4vw) scale(1.1);} }
+/* static, GPU-cheap ambient wash (no per-frame compositing) */
+.orb { position:absolute; border-radius:50%; filter:blur(52px); opacity:0.45; }
+.orb-1 { width:42vw; height:42vw; left:-12vw; top:-10vw; background:radial-gradient(circle, rgba(138,51,70,0.28), transparent 70%); }
+.orb-2 { width:36vw; height:36vw; right:-10vw; top:18vh; background:radial-gradient(circle, rgba(191,166,160,0.42), transparent 70%); }
+.orb-3 { display:none; }
 
 /* ---------- scroll progress ---------- */
 .progress { position:fixed; top:0; left:0; right:0; height:3px; z-index:200; background:transparent; }
@@ -99,7 +98,7 @@ body.cursor-on a, body.cursor-on button { cursor:none; }
 
 /* ---------- nav ---------- */
 .nav { position:fixed; top:0; left:0; right:0; z-index:150; transition:all .35s var(--ease); padding:18px 0; }
-.nav.scrolled { padding:10px 0; background:rgba(247,243,236,0.72); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); border-bottom:1px solid var(--line-soft); }
+.nav.scrolled { padding:10px 0; background:rgba(247,243,236,0.94); border-bottom:1px solid var(--line-soft); box-shadow:0 4px 20px rgba(61,44,41,0.06); }
 .nav-inner { max-width:var(--maxw); margin:0 auto; padding:0 32px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
 .nav-logo { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:20px; color:var(--ink); letter-spacing:-0.5px; }
 .nav-logo span { color:var(--burgundy); }
@@ -151,8 +150,9 @@ body.cursor-on a, body.cursor-on button { cursor:none; }
 .hero-scroll span { width:4px; height:8px; border-radius:2px; background:var(--burgundy); margin-top:7px; animation:scrolldot 1.8s var(--ease) infinite; }
 @keyframes scrolldot { 0%{ opacity:0; transform:translateY(-4px);} 40%{ opacity:1;} 80%{ opacity:0; transform:translateY(10px);} 100%{ opacity:0;} }
 
-/* glassmorphism */
-.glass { background:var(--glass-bg); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); border:1px solid var(--glass-brd); box-shadow:var(--sh-glass); }
+/* Frosted panels via opaque translucency (no backdrop-filter), so there is no
+   per-frame GPU blur compositing on scroll. Looks like glass, costs almost nothing. */
+.glass { background:rgba(253,251,248,0.9); border:1px solid var(--glass-brd); box-shadow:var(--sh-glass); }
 
 /* ---------- trust marquee ---------- */
 .trust { padding:26px 0; border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft); background:rgba(253,251,248,0.4); overflow:hidden; }
@@ -182,6 +182,10 @@ body.cursor-on a, body.cursor-on button { cursor:none; }
 .industry-desc { font-size:14px; color:var(--text); line-height:1.65; }
 .industry-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
 .industry-tags span { font-family:'Space Grotesk',sans-serif; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--burgundy); background:rgba(107,39,55,0.07); border:1px solid var(--line); padding:5px 10px; border-radius:100px; }
+
+/* on-brand image placeholders (swap for real photos) */
+.media-ph { position:relative; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, var(--taupe) 0%, var(--burgundy-2) 58%, var(--burgundy) 100%); }
+.media-ph::before { content:attr(data-ph); position:relative; z-index:3; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:rgba(253,251,248,0.9); padding:8px 16px; border:1px solid rgba(253,251,248,0.45); border-radius:100px; }
 
 /* ---------- case studies ---------- */
 .cases { display:flex; flex-direction:column; gap:28px; }
@@ -232,6 +236,17 @@ body.cursor-on a, body.cursor-on button { cursor:none; }
 .viral-metrics span { display:block; font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700; color:var(--burgundy); letter-spacing:-0.5px; margin-bottom:2px; }
 .viral-why { font-size:13px; color:var(--text); line-height:1.7; }
 .viral-why strong { color:var(--ink); }
+
+/* AI video feature panel */
+.viral-feature { margin-top:18px; padding:42px 44px; border-radius:var(--r-lg); display:grid; grid-template-columns:1.5fr 1fr; gap:40px; align-items:center; }
+.vf-tag { display:inline-flex; align-items:center; gap:10px; font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--burgundy); margin-bottom:14px; }
+.vf-tag::before { content:''; width:24px; height:1.5px; background:var(--burgundy); }
+.vf-title { font-size:clamp(24px,2.6vw,32px); font-weight:700; letter-spacing:-0.8px; line-height:1.1; margin-bottom:14px; }
+.viral-feature p { font-size:15px; color:var(--text); line-height:1.7; max-width:560px; }
+.vf-stats { display:flex; flex-direction:column; gap:14px; }
+.vf-stats div { font-family:'Space Grotesk',sans-serif; font-size:12px; letter-spacing:0.5px; color:var(--muted); padding:14px 18px; border:1px solid var(--line); border-radius:var(--r-sm); background:rgba(107,39,55,0.04); }
+.vf-stats span { color:var(--burgundy); font-weight:600; }
+@media (max-width:768px){ .viral-feature { grid-template-columns:1fr; gap:26px; padding:32px 26px; } }
 
 /* ---------- testimonials ---------- */
 .tcarousel { position:relative; }
@@ -294,7 +309,7 @@ body.cursor-on a, body.cursor-on button { cursor:none; }
 @media (max-width:768px){
   .nav-links { display:none; }
   .nav-toggle { display:flex; }
-  .nav-links.open { display:flex; position:absolute; top:64px; right:20px; left:20px; flex-direction:column; gap:18px; padding:24px; border-radius:var(--r); background:rgba(247,243,236,0.92); backdrop-filter:var(--glass-blur); -webkit-backdrop-filter:var(--glass-blur); border:1px solid var(--line-soft); box-shadow:var(--sh-2); }
+  .nav-links.open { display:flex; position:absolute; top:64px; right:20px; left:20px; flex-direction:column; gap:18px; padding:24px; border-radius:var(--r); background:rgba(247,243,236,0.98); border:1px solid var(--line-soft); box-shadow:var(--sh-2); }
   .section { padding:84px 22px; }
   .hero { padding:120px 22px 60px; }
   .case-content { padding:32px 26px; }
