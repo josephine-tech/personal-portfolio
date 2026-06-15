@@ -75,15 +75,7 @@
     var G = window.gsap;
     var ST = window.ScrollTrigger;
 
-    /* ---- Lenis smooth scrolling ---- */
-    var lenis = null;
-    if (window.Lenis && !reduce) {
-      lenis = new window.Lenis({ duration: 0.8, smoothWheel: true });
-      var raf = function (t) { lenis.raf(t); requestAnimationFrame(raf); };
-      requestAnimationFrame(raf);
-    }
-
-    /* ---- in-page anchor scrolling ---- */
+    /* ---- in-page anchor scrolling (native) ---- */
     document.querySelectorAll('a[href^="#"]').forEach(function (a) {
       a.addEventListener('click', function (e) {
         var id = a.getAttribute('href');
@@ -91,15 +83,14 @@
         var t = document.querySelector(id);
         if (!t) return;
         e.preventDefault();
-        if (lenis) lenis.scrollTo(t, { offset: -70 });
-        else t.scrollIntoView({ behavior: 'smooth' });
+        var y = t.getBoundingClientRect().top + window.scrollY - 70;
+        window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
       });
     });
 
     /* ---- scroll reveals + bar charts ---- */
     if (G && ST && !reduce) {
       G.registerPlugin(ST);
-      if (lenis) lenis.on('scroll', ST.update);
 
       G.set('.reveal', { opacity: 0, y: 34 });
       ST.batch('.reveal', {
