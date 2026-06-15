@@ -1,22 +1,29 @@
 :root {
-  /* Light, warm palette */
-  --bg: #FBF7F0;          /* page background (warm ivory) */
-  --surface: #FFFFFF;     /* primary cards */
-  --surface2: #F4EEE3;    /* alternate surface / bands */
-  --surface3: #EFE7D8;    /* deeper alt surface */
-  --ink: #15151E;         /* headings / strong text */
-  --text: #3C3C49;        /* body text */
-  --coral: #E8472A;
-  --coral-dim: rgba(232,71,42,0.08);
-  --coral-mid: rgba(232,71,42,0.22);
-  --gray: #8A8392;        /* muted labels */
-  --lgray: rgba(21,21,30,0.10);
-  --ivory: #FBF7F0;       /* light text on coral surfaces */
-  --navy: #15151E;        /* dark text on coral surfaces (marquee, etc.) */
-  --navy2: #FFFFFF;       /* legacy alias -> light surface */
-  --navy3: #F4EEE3;       /* legacy alias -> alt surface */
-  --shadow: 0 1px 3px rgba(21,21,30,0.05), 0 10px 30px rgba(21,21,30,0.05);
-  --shadow-hover: 0 4px 10px rgba(21,21,30,0.07), 0 18px 44px rgba(21,21,30,0.09);
+  /* Burgundy & Cream Executive palette */
+  --burgundy: #6B2737;    /* primary: buttons, links, key headings, icons, CTAs */
+  --cream: #F7F3EC;       /* secondary: primary background */
+  --taupe: #BFA6A0;       /* accent: dividers, subtle backgrounds, hover states */
+  --espresso: #3D2C29;    /* dark text: body and navigation */
+  --light: #FDFBF8;       /* light background: cards */
+
+  --bg: #F7F3EC;          /* page background (cream) */
+  --surface: #FDFBF8;     /* primary cards (light) */
+  --surface2: #EFE6DF;    /* alternate surface / bands (warm taupe-cream) */
+  --surface3: #E6D9D2;    /* deeper alt surface */
+  --ink: #3D2C29;         /* headings / strong text (espresso) */
+  --text: #4A352F;        /* body text (espresso, AA on cream) */
+  --coral: #6B2737;       /* primary accent -> burgundy */
+  --coral-dim: rgba(107,39,55,0.07);
+  --coral-mid: rgba(107,39,55,0.24);
+  --gray: #6F5A52;        /* muted labels (dark taupe, AA on cream) */
+  --lgray: rgba(191,166,160,0.6);   /* dividers (warm taupe) */
+  --hover: rgba(191,166,160,0.18);  /* subtle taupe hover wash */
+  --ivory: #FDFBF8;       /* light text on burgundy surfaces */
+  --navy: #3D2C29;        /* dark text alias (espresso) */
+  --navy2: #FDFBF8;       /* legacy alias -> light surface */
+  --navy3: #EFE6DF;       /* legacy alias -> alt surface */
+  --shadow: 0 1px 3px rgba(61,44,41,0.06), 0 10px 30px rgba(61,44,41,0.07);
+  --shadow-hover: 0 4px 10px rgba(61,44,41,0.10), 0 18px 44px rgba(61,44,41,0.13);
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -24,6 +31,7 @@ html { scroll-behavior:smooth; }
 body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; overflow-x:hidden; }
 
 img { display:block; max-width:100%; }
+a { color:var(--coral); }
 
 /* ── HERO ── */
 .hero {
@@ -61,11 +69,11 @@ img { display:block; max-width:100%; }
 
 .hero-img-overlay {
   position:absolute; inset:0;
-  background:linear-gradient(90deg, var(--bg) 0%, rgba(251,247,240,0) 38%);
+  background:linear-gradient(90deg, var(--bg) 0%, rgba(247,243,236,0) 38%);
   pointer-events:none;
 }
 @media(max-width:768px){
-  .hero-img-overlay{ background:linear-gradient(0deg, var(--bg) 0%, rgba(251,247,240,0) 55%); }
+  .hero-img-overlay{ background:linear-gradient(0deg, var(--bg) 0%, rgba(247,243,236,0) 55%); }
 }
 
 .hero-badge {
@@ -229,7 +237,7 @@ img { display:block; max-width:100%; }
   transform:translateY(-50%);
   font-family:'Fraunces',serif;
   font-size:140px; font-weight:900;
-  color:rgba(232,71,42,0.07);
+  color:rgba(107,39,55,0.08);
   line-height:1; letter-spacing:-4px;
 }
 
@@ -493,6 +501,7 @@ img { display:block; max-width:100%; }
 }
 
 .brand-item:hover {
+  background:var(--hover);
   border-color:var(--coral-mid);
   transform:translateY(-2px);
   box-shadow:var(--shadow-hover);
@@ -526,7 +535,7 @@ img { display:block; max-width:100%; }
   transition:border-color 0.2s, box-shadow 0.2s;
 }
 @media(max-width:640px){ .exp-row{ grid-template-columns:1fr; } }
-.exp-row:hover { border-color:var(--coral-mid); box-shadow:var(--shadow); }
+.exp-row:hover { background:var(--hover); border-color:var(--coral-mid); box-shadow:var(--shadow); }
 
 .exp-company {
   font-size:15px; font-weight:600; color:var(--ink);
