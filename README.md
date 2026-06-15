@@ -1,17 +1,25 @@
-# Josephine — Portfolio Site
+# Josephine, Portfolio Site
 
 A single-page portfolio site for Josephine, Creative Strategist & Performance Marketer.
 
-Built as a static site with plain HTML and CSS — no build step, no dependencies.
+Built as a static site with plain HTML and CSS, no build step, no dependencies.
 
 ## Structure
 
 | File | Purpose |
 | --- | --- |
 | `index.html` | Page markup and content |
-| `styles.css` | All styling (extracted from the original single-file design) |
+| `styles.css` | All styling (warm light theme; design tokens are CSS variables at the top) |
 | `favicon.svg` | Site icon |
+| `images/portrait.svg` | Hero portrait **placeholder** |
 | `.nojekyll` | Tells GitHub Pages to serve files as-is |
+
+## Photos
+
+The site has three replaceable image slots:
+
+- **Hero portrait**: currently `images/portrait.svg`, a styled placeholder. Drop in a real headshot (e.g. `images/josephine.jpg`) and update the `src` of `.hero-img` in `index.html`.
+- **Case study covers & Ilebaye banner**: currently pull tasteful decorative stock images from `picsum.photos`. Replace those `src` URLs with real campaign visuals or screenshots for the strongest effect.
 
 ## Run locally
 
@@ -28,7 +36,7 @@ python3 -m http.server 8000
 2. In **Settings → Pages**, set the source to the branch and `/ (root)` folder.
 3. The site publishes at `https://<user>.github.io/personal-portfolio/`.
 
-The site is also ready for any static host (Netlify, Vercel, Cloudflare Pages) — point it at the repo root.
+The site is also ready for any static host (Netlify, Vercel, Cloudflare Pages); point it at the repo root.
 
 ## Editing
 
