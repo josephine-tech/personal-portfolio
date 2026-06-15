@@ -150,10 +150,8 @@ body.cursor-on a, body.cursor-on button { cursor:none; }
 .hero-scroll span { width:4px; height:8px; border-radius:2px; background:var(--burgundy); margin-top:7px; animation:scrolldot 1.8s var(--ease) infinite; }
 @keyframes scrolldot { 0%{ opacity:0; transform:translateY(-4px);} 40%{ opacity:1;} 80%{ opacity:0; transform:translateY(10px);} 100%{ opacity:0;} }
 
-/* Frosted panels. backdrop-filter (the expensive part) is reserved for the
-   few elements that actually overlap imagery: the hero KPI cards and the nav.
-   Everywhere else uses an opaque-enough translucent panel that looks identical
-   without the per-frame GPU compositing cost. */
+/* Frosted panels via opaque translucency (no backdrop-filter), so there is no
+   per-frame GPU blur compositing on scroll. Looks like glass, costs almost nothing. */
 .glass { background:rgba(253,251,248,0.9); border:1px solid var(--glass-brd); box-shadow:var(--sh-glass); }
 
 /* ---------- trust marquee ---------- */

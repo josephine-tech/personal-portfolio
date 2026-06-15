@@ -1,5 +1,5 @@
 /* Josephine portfolio · premium interactions
-   Built on GSAP + ScrollTrigger + Lenis (loaded via CDN).
+   Built on GSAP + ScrollTrigger (loaded via CDN), native scrolling.
    Degrades gracefully: if a library or motion is unavailable,
    all content stays fully visible and usable. */
 (function () {
