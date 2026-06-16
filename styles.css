@@ -324,10 +324,15 @@ body.cursor-on a, body.cursor-on button { cursor:none; }
   .nav-toggle { display:flex; }
   .nav-links.open { display:flex; position:absolute; top:64px; right:20px; left:20px; flex-direction:column; gap:18px; padding:24px; border-radius:var(--r); background:rgba(247,243,236,0.98); border:1px solid var(--line-soft); box-shadow:var(--sh-2); }
   .section { padding:84px 22px; }
-  .hero { padding:120px 22px 60px; }
+  .hero { padding:104px 22px 56px; min-height:auto; }
+  .hero-scroll { display:none; }
   .case-content { padding:32px 26px; }
   .case-breakdown { grid-template-columns:1fr; }
-  .kpi-1 { left:-2%; } .kpi-2 { left:-4%; } .kpi-3 { right:-2%; } .kpi-4 { right:0; }
+  /* hero visual: stack portrait + KPI grid instead of floating cards */
+  .hero-visual { max-width:440px; }
+  .hero-stage { aspect-ratio:auto; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .hero-portrait { position:relative; inset:auto; grid-column:1 / -1; width:100%; aspect-ratio:4/5; animation:none; }
+  .kpi { position:static; animation:none; }
 }
 @media (max-width:560px){
   .stats-grid, .industries-grid, .viral-grid, .sig-grid { grid-template-columns:1fr; }
