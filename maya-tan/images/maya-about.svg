@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Portrait placeholder for Maya Tan">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#efe7d8"/>
+      <stop offset="1" stop-color="#e1d5bd"/>
+    </linearGradient>
+    <radialGradient id="spot2" cx="0.5" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fig2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c3d5a"/>
+      <stop offset="1" stop-color="#102a43"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg2)"/>
+  <circle cx="300" cy="250" r="260" fill="url(#spot2)"/>
+  <g>
+    <path d="M118 600 C118 452 196 392 300 392 C404 392 482 452 482 600 Z" fill="url(#fig2)"/>
+    <path d="M276 372 L276 420 Q300 442 324 420 L324 372 Z" fill="#274a68"/>
+    <ellipse cx="300" cy="300" rx="78" ry="94" fill="#274a68"/>
+    <path d="M222 300 C222 214 252 202 300 202 C348 202 378 214 378 300 C378 270 352 246 300 246 C248 246 222 270 222 300 Z" fill="#102a43"/>
+  </g>
+  <circle cx="300" cy="300" r="288" fill="none" stroke="#c39b46" stroke-width="2" opacity="0.4"/>
+</svg>
