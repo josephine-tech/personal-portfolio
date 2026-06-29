@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 1075" width="860" height="1075" role="img" aria-label="Editorial portrait placeholder for Maya Tan">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#16334e"/>
+      <stop offset="0.55" stop-color="#102a43"/>
+      <stop offset="1" stop-color="#0b2034"/>
+    </linearGradient>
+    <radialGradient id="spot" cx="0.5" cy="0.42" r="0.62">
+      <stop offset="0" stop-color="#efe7d8" stop-opacity="0.9"/>
+      <stop offset="0.55" stop-color="#e6dcc7" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#e6dcc7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fig" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c3d5a"/>
+      <stop offset="1" stop-color="#0e2740"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d8b863"/>
+      <stop offset="1" stop-color="#a87f33"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="860" height="1075" fill="url(#bg)"/>
+  <circle cx="430" cy="450" r="430" fill="url(#spot)"/>
+
+  <!-- elegant figure silhouette -->
+  <g>
+    <!-- shoulders / blazer -->
+    <path d="M168 1075 C168 838 268 742 430 742 C592 742 692 838 692 1075 Z" fill="url(#fig)"/>
+    <!-- blazer lapels -->
+    <path d="M430 760 L372 1075 L412 1075 L430 836 L448 1075 L488 1075 Z" fill="#0b2238" opacity="0.85"/>
+    <!-- neck -->
+    <path d="M392 716 L392 792 Q430 824 468 792 L468 716 Z" fill="#274a68"/>
+    <!-- head -->
+    <ellipse cx="430" cy="600" rx="118" ry="142" fill="#274a68"/>
+    <!-- hair -->
+    <path d="M312 600 C312 470 360 452 430 452 C500 452 548 470 548 600 C548 556 512 520 430 520 C348 520 312 556 312 600 Z" fill="#0e2740"/>
+  </g>
+
+  <!-- gold frame -->
+  <rect x="28" y="28" width="804" height="1019" rx="22" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.55"/>
+
+  <!-- monogram -->
+  <text x="430" y="1012" text-anchor="middle" font-family="Georgia, serif" font-size="26" letter-spacing="6" fill="#efe7d8" opacity="0.6">MAYA TAN</text>
+</svg>
